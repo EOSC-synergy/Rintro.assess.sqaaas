@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/mtceballos/Rintro:
+      branch: main
+      repo: https://github.com/mtceballos/Rintro
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/mtceballos/Rintro git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-beige-monkey.sh
+        container: qc.acc_bluesy-cinnabar-budgerigar
+  QC.Doc:
+    repos:
+      github.com/mtceballos/Rintro find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-firebrick-malamute.sh
+        container: qc.doc_cheeky-red-fly
+      github.com/mtceballos/Rintro git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-flax-dhole.sh
+        container: qc.doc_homely-auburn-chow
+      github.com/mtceballos/Rintro markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-sangria-oriole.sh
+        container: qc.doc_flaky-copper-tiger
+      github.com/mtceballos/Rintro restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-goldenrod-wolverine.sh
+        container: qc.doc_lanky-vermilion-gar
+  QC.Lic:
+    repos:
+      github.com/mtceballos/Rintro licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-crimson-javanese.sh
+        container: qc.lic_homey-ivory-javanese
+  QC.Sec:
+    repos:
+      github.com/mtceballos/Rintro bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-cerise-caracal.sh
+        container: qc.sec_flabby-emerald-coyote
+  QC.Sty:
+    repos:
+      github.com/mtceballos/Rintro flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-ruby-abyssinian.sh
+        container: qc.sty_cozy-indigo-pig
+  QC.Uni:
+    repos:
+      github.com/mtceballos/Rintro pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-copper-vulture.sh
+        container: qc.uni_stealthy-russet-sheep
+  QC.Ver:
+    repos:
+      github.com/mtceballos/Rintro get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-cream-cow.sh
+        container: qc.ver_cheeky-yellow-beetle
+timeout: 5400
